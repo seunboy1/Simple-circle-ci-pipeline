@@ -1,5 +1,5 @@
 # Simple-circle-ci-pipeline
-This is a simple pipeline that uses Circle CI to automate a CI process.
+This is a simple Continuous Integration pipeline created using Circle CI.
 
 This consists of the common CI stages:
 1. Compile 
