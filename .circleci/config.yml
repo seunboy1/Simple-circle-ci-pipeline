@@ -19,6 +19,7 @@ jobs:
     steps:
       - checkout
       - run: touch inventory
+      - run: echo "[all]" > inventory
       - run: aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --output text >> inventory
@@ -34,8 +35,11 @@ jobs:
       - restore_cache:
           keys:
             - "npm-packages"
+            - "ansible-inventory"
       - run: npm i
       - run: npm run test
+      - run: cat inventory
+
   analyze:
     docker:
       - image: circleci/node:13.8.0
@@ -50,9 +54,11 @@ workflows:
   my_workflow:
     jobs:
       - build
+      - create_ansible_inventory
       - test:
           requires:
             - build
+            - create_ansible_inventory
       - analyze:
           requires:
             - test
