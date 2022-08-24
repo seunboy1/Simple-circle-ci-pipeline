@@ -20,9 +20,7 @@ jobs:
       - checkout
       - run: touch inventory
       - run: echo "[all]" > inventory
-      - run: aws ec2 describe-instances \
-            --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text >> inventory
+      - run: aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory
       - save_cache:
           key: "ansible-inventory"
           paths:
