@@ -12,6 +12,20 @@ jobs:
           paths:
             - /src/node_modules
       - run: npm run lint
+
+  create_ansible_inventory:
+    docker:
+      - image: amazon/aws-cli:latest
+    steps:
+      - checkout
+      - run: touch inventory
+      - run: aws ec2 describe-instances \
+            --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            --output text >> inventory
+      - save_cache:
+          key: "ansible-inventory"
+          paths:
+            - ./
   test:
     docker:
       - image: circleci/node:13.8.0
