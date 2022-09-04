@@ -8,7 +8,7 @@ commands:
     parameters:
       id:
         type: string
-        default: "123" 
+        default: "1234567890" 
     steps:
       - run: echo << parameters.id >>
 
@@ -20,6 +20,7 @@ jobs:
       - checkout
       - run:
           name: "Say hello world and save the output"
+          command: echo "Hello, world!" 
           command: echo "Hello, world!" > ~/output.txt
       - persist_to_workspace:
           root: ~/
