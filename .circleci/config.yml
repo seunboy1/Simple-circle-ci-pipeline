@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run:
           name: "Say hello world and save the output"
-          command: echo "Hello, world!" 
+          command: echo "Hello, world Seun!  " 
           command: echo "Hello, world!" > ~/output.txt
       - persist_to_workspace:
           root: ~/
