@@ -92,6 +92,11 @@ jobs:
 workflows:
   my_workflow:
     jobs:
+      - print_hello
+      - print_output_file:
+          requires: [print_hello]
+      - print_var
+      - print_id_from_command
       - build
       - test:
           requires:
